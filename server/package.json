@@ -1,0 +1,26 @@
+{
+  "name": "lamda-chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "lambda-build archive -e index.js"
+  },
+  "keywords": [
+    "lambda",
+    "websockets",
+    "chat",
+    "serverless"
+  ],
+  "author": "Divyanshu Bhoyar",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.1048.0",
+    "lambda-actions": "*"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.89",
+    "@types/node": "^17.0.6",
+    "lambda-build": "^1.0.6"
+  }
+}

@@ -1,0 +1,51 @@
+const AWS = require("aws-sdk")
+
+var NAMES_DB = {}
+
+const ENDPOINT = "to7r3ms4d0.execute-api.us-east-1.amazonaws.com/production/"
+const client = new AWS.ApiGatewayManagementApi({ endpoint: ENDPOINT })
+
+const sendToOne = async (id, body) => {
+    try {
+        await client.postToConnection({
+            'ConnectionId': id,
+            'Data': Buffer.from(JSON.stringify(body))
+        }).promise()
+    } catch (e) {
+        console.error(e)
+    }
+}
+
+const sendToAll = async (ids, body) => {
+    const all = ids.map(i => sendToOne(i, body))
+    return Promise.all(all)
+}
+
+exports.$connect = async () => {
+    return {};
+};
+
+exports.setName = async (payload, meta) => {
+    NAMES_DB[meta.connectionId] = payload.name;
+    await sendToAll(Object.keys(NAMES_DB), { members: Object.values(NAMES_DB) })
+    await sendToAll(Object.keys(NAMES_DB), { systemMessage: `${NAMES_DB[meta.connectionId]} has joined the chat` })
+    return {}
+}
+
+exports.sendPublic = async (payload, meta) => {
+    await sendToAll(Object.keys(NAMES_DB), { publicMessage: `${NAMES_DB[meta.connectionId]}: ${payload.message}` })
+    return {};
+};
+
+exports.sendPrivate = async (payload, meta) => {
+    const to = Object.keys(NAMES_DB).find(key => NAMES_DB[key] === payload.to)
+    await sendToOne(to, { privateMessage: `${NAMES_DB[meta.connectionId]}: ${payload.message}` });
+    return {};
+}
+
+exports.$disconnect = async (payload, meta) => {
+    await sendToAll(Object.keys(NAMES_DB), { systemMessage: `${NAMES_DB[meta.connectionId]} has left the chat` })
+    delete NAMES_DB[meta.connectionId];
+    await sendToAll(Object.keys(NAMES_DB), { members: Object.values(NAMES_DB) })
+    return {};
+};
