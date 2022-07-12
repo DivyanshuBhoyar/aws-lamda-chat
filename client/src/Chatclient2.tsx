@@ -53,7 +53,7 @@ const ChatClient2 = (props: Props) => {
   };
 
   return (
-    <div className="flex border-2 border-gray-500 m-1 w-8/12 mx-auto my-4  h-[90vh]  ">
+    <div className="flex border-2 border-gray-500 m-1 w-11/12 mx-auto my-4  h-[90vh]  ">
       <div className="h-full relative  py-4 px-2  list-none  w-1/4 border-r-2 border-double  border-yellow-600 hover:border-dotted ">
         <div
           style={{
@@ -67,14 +67,16 @@ const ChatClient2 = (props: Props) => {
           }}
         />
         <ul>
-          <li>
-            You <span></span>{" "}
-          </li>
+          <li>Click names to private msg.</li>
         </ul>
         <ol>
           {members.map((m) => (
-            <li>
-              <p onClick={() => onPrivateMessage(m)}> {m}</p>
+            <li className="cursor-pointer my-2">
+              <p
+                className="text-teal-600 text-lg font-semibold"
+                onClick={() => onPrivateMessage(m)}>
+                {m} <span className="ml-3">💬 </span>
+              </p>
             </li>
           ))}
         </ol>
@@ -82,14 +84,14 @@ const ChatClient2 = (props: Props) => {
           {!props.isConnected && (
             <button
               onClick={onConnect}
-              className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+              className="bg-transparent mb-2  hover:bg-blue-500 text-blue-700  hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-xl ">
               Connect
             </button>
           )}
           {props.isConnected && (
             <button
               onClick={onDisconnect}
-              className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+              className="bg-transparent mb-2  hover:bg-blue-500 text-blue-700  hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-xl ">
               Disconnect
             </button>
           )}
