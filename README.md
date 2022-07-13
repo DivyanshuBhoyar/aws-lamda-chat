@@ -15,7 +15,8 @@ Built using serverless technogies, scalable and fast.
 ## Demo
 Live at : https://merry-marshmallow-6210e6.netlify.app/
 
-
+## Demo video
+[![Demo video](https://img.youtube.com/vi/3huUIiPjBu4/0.jpg)](https://www.youtube.com/watch?v=3huUIiPjBu4)
 
 
 ## Screenshots
@@ -27,5 +28,4 @@ Live at : https://merry-marshmallow-6210e6.netlify.app/
 ![Personal](https://raw.githubusercontent.com/DivyanshuBhoyar/aws-lamda-chat/master/.screenshots/ss4.png)
 ![New](https://raw.githubusercontent.com/DivyanshuBhoyar/aws-lamda-chat/master/.screenshots/ss5.png)
 
-## Demo video
-[![Demo video](https://img.youtube.com/vi/3huUIiPjBu4/0.jpg)](https://www.youtube.com/watch?v=3huUIiPjBu4)
+
